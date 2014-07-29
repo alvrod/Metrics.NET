@@ -24,13 +24,13 @@ namespace Owin.Metrics.Middleware
             this.next = next;
         }
 
-        public async Task Invoke(IDictionary<string, object> environment)
+        /*public async Task Invoke(IDictionary<string, object> environment)
         {
             this.activeRequests.Increment();
 
             await this.next(environment);
 
             this.activeRequests.Decrement();
-        }
+        }*/
     }
 }

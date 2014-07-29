@@ -24,7 +24,7 @@ namespace Owin.Metrics.Middleware
             this.next = next;
         }
 
-        public async Task Invoke(IDictionary<string, object> environment)
+        /*public async Task Invoke(IDictionary<string, object> environment)
         {
             await next(environment);
 
@@ -34,6 +34,6 @@ namespace Owin.Metrics.Middleware
             {
                 errorMeter.Mark();
             }
-        }
+        }*/
     }
 }

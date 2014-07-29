@@ -58,19 +58,15 @@ namespace Metrics.Utils
             RunScheduler(interval, task, this.token);
         }
 
-        private static void RunScheduler(TimeSpan interval, Func<CancellationToken, Task> action, CancellationTokenSource token)
-        {
-            Task.Factory.StartNew(async () =>
-            {
-                while (!token.IsCancellationRequested)
-                {
-                    await Task.Delay(interval, token.Token);
-                    try
-                    {
-                        await action(token.Token);
+        private static void RunScheduler(TimeSpan interval, Func<CancellationToken, Task> action, CancellationTokenSource token) {
+            Task.Factory.StartNew(() => {
+                while (!token.IsCancellationRequested) {
+                    TaskUtils.Delay(interval, token.Token).Wait(token.Token);
+
+                    try {
+                        action(token.Token).Wait(token.Token);
                     }
-                    catch (Exception x)
-                    {
+                    catch (Exception x) {
                         HandleException(x);
                         token.Cancel();
                     }
@@ -78,19 +74,15 @@ namespace Metrics.Utils
             }, token.Token);
         }
 
-        private static Task Completed()
-        {
-            return Task.FromResult(true);
+        private static Task Completed() {
+            return TaskUtils.FromResult(true);
         }
 
-        private static void HandleException(Exception x)
-        {
-            if (Metric.Config.ErrorHandler != null)
-            {
+        private static void HandleException(Exception x) {
+            if (Metric.Config.ErrorHandler != null) {
                 Metric.Config.ErrorHandler(x);
             }
-            else
-            {
+            else {
                 Trace.Fail("Got exception while executing scheduler. You can handle this exception by setting a handler on Metric.ErrorHandler", x.ToString());
             }
         }

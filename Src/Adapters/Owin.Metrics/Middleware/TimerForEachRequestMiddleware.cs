@@ -29,7 +29,7 @@ namespace Owin.Metrics.Middleware
             this.next = next;
         }
 
-        public async Task Invoke(IDictionary<string, object> environment)
+        /*public async Task Invoke(IDictionary<string, object> environment)
         {
             environment[RequestStartTimeKey] = Clock.Default.Nanoseconds;
 
@@ -46,6 +46,6 @@ namespace Owin.Metrics.Middleware
                 var elapsed = Clock.Default.Nanoseconds - startTime;
                 Metric.Timer(name, Unit.Requests).Record(elapsed, TimeUnit.Nanoseconds);
             }
-        }
+        }*/
     }
 }

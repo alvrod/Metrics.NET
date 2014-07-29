@@ -24,7 +24,7 @@ namespace Owin.Metrics.Middleware
             this.next = next;
         }
 
-        public async Task Invoke(IDictionary<string, object> environment)
+        /*public async Task Invoke(IDictionary<string, object> environment)
         {
             var httpMethod = environment["owin.RequestMethod"].ToString().ToUpper();
 
@@ -38,6 +38,6 @@ namespace Owin.Metrics.Middleware
             }
 
             await next(environment);
-        }
+        }*/
     }
 }

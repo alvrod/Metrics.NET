@@ -24,7 +24,7 @@ namespace Owin.Metrics.Middleware
             this.next = next;
         }
 
-        public async Task Invoke(IDictionary<string, object> environment)
+        /*public async Task Invoke(IDictionary<string, object> environment)
         {
             environment[TimerItemsKey] = this.requestTimer.NewContext();
 
@@ -33,6 +33,6 @@ namespace Owin.Metrics.Middleware
             var timer = environment[TimerItemsKey];
             using (timer as IDisposable) { }
             environment.Remove(TimerItemsKey);
-        }
+        }*/
     }
 }
